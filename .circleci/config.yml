@@ -77,24 +77,24 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - dev
-      - hold-alpha:
+      - approve-alpha-deployment:
           type: approval
           requires:
             - dev
       - alpha:
           requires:
-            - hold-alpha
-      - hold-beta:
+            - approve-alpha-deployment
+      - approve-beta-deployment:
           type: approval
           requires:
             - alpha
       - beta:
           requires:
-            - hold-beta
-      - hold-prod:
+            - approve-beta-deployment
+      - approve-prod-deployment:
           type: approval
           requires:
             - beta
       - prod:
           requires:
-            - hold-prod
+            - approve-prod-deployment
